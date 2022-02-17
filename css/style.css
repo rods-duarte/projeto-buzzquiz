@@ -125,16 +125,16 @@ ion-icon {
     height: 181px;
     margin: 5px 0;
     border-radius: 5px;
-    background-image: url("https://br.web.img2.acsta.net/r_654_368/newsv7/21/10/15/22/09/2037612.jpg");
-    background-size: contain;
+    background-image: linear-gradient(to top, black, transparent), url("https://br.web.img2.acsta.net/r_654_368/newsv7/21/10/15/22/09/2037612.jpg");
+    background-size: cover;
     
     position: relative;
 }
 
 .item-quiz > h3 {
     position: absolute;
-    left: 0;
-    bottom: 0;
+    left: 17px;
+    bottom: 7px;
     font-size: 20px;
     color: #FFF;
 }
@@ -160,3 +160,7 @@ ion-icon {
 }
 
 /* Fim Tela 1 */
+
+.escondido{
+    display: none;
+}
