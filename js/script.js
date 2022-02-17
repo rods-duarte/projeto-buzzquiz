@@ -6,13 +6,10 @@ function listarQuizzes(){
 }
 
 function gerarQuizzDinamicamente(resposta){
-    // console.log(resposta.data)
-
     const lstQuizz = document.querySelector(".lista-quiz.todos");
     // Para criar gerar a lista com os "Seus Quizzes", basta acessar com o 'querySelector' e povoar a lista usando o 'for'
 
     const quizzes = resposta.data;
-    // console.log(quizzes[0].title)
 
     lstQuizz.innerHTML = "";
     lstQuizz.innerHTML = `<h2>Todos os quizzes</h2>`;
