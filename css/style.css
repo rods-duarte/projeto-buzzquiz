@@ -57,6 +57,10 @@ ion-icon {
   font-size: 32px;
 }
 
+.escondido {
+  display: none;
+}
+
 /* Fim Geral */
 
 /* Inicio Tela 1 */
@@ -84,7 +88,7 @@ ion-icon {
 }
 
 .topo-usuario > button {
-  background-color: #fff;
+  background-color: #e5e5e5;
   border: none;
 }
 
@@ -131,16 +135,17 @@ ion-icon {
   height: 181px;
   margin: 5px 0;
   border-radius: 5px;
-  background-image: url("https://br.web.img2.acsta.net/r_654_368/newsv7/21/10/15/22/09/2037612.jpg");
-  background-size: contain;
+  background-image: linear-gradient(to top, black, transparent),
+    url("https://br.web.img2.acsta.net/r_654_368/newsv7/21/10/15/22/09/2037612.jpg");
+  background-size: cover;
 
   position: relative;
 }
 
 .item-quiz > h3 {
   position: absolute;
-  left: 0;
-  bottom: 0;
+  left: 17px;
+  bottom: 7px;
   font-size: 20px;
   color: #fff;
 }
@@ -180,15 +185,19 @@ ion-icon {
 /* Inicio Tela 3 */
 
 #tela-3-1 > h2,
-#tela-3-2 > h2 {
+#tela-3-2 > h2,
+#tela-3-3 > h2,
+#tela-3-4 > h2 {
   font-size: 20px;
   font-weight: 700;
   text-align: center;
 }
 
 #tela-3-1 > button,
-#tela-3-2 > button {
-  width: 324px;
+#tela-3-2 > button,
+#tela-3-3 > button,
+#tela-3-4 > button {
+  width: 320px;
   height: 54px;
   margin: 30px auto 0 auto;
   border: none;
@@ -229,10 +238,11 @@ ion-icon {
 }
 
 .caixa-fechada ion-icon {
-    color: #000;
+  color: #000;
 }
 
-input {
+input,
+textarea {
   width: 341px;
   height: 46px;
   margin: 5px;
@@ -241,6 +251,13 @@ input {
   border-radius: 5px;
 
   font-size: 19px;
+}
+
+textarea {
+  height: 177px;
+  resize: none;
+  font-family: "Roboto", sans-serif;
+  padding-top: 10px;
 }
 
 ::placeholder {
@@ -267,16 +284,18 @@ input {
 
 /* Tela 3-2 */
 
-#tela-3-1 {
-  display: block;
+#tela-3-2 .caixa-aberta {
+  display: none;
 }
 
-#tela-3-2 .caixa-aberta {display: none;}
-
-.caixa-aberta > h2 {
+.caixa-aberta h2 {
   text-align: left;
   display: inline-block;
-  width: 341px;
+  width: 340px;
+}
+
+@media screen and (max-width: 340px) {
+    .caixa-aberta h2 {width: 310px;}
 }
 
 .caixa-aberta > div {
@@ -286,4 +305,22 @@ input {
   justify-content: center;
   margin-top: 10px;
   margin-bottom: 30px;
+}
+
+/* Tela 3-3 */
+
+#tela-3-1 {
+  display: block;
+}
+
+#tela-3-3 .caixa-aberta {
+  display: none;
+}
+
+@media screen and (min-width: 1100px) {
+
+    .caixa {
+        width: 600px;
+        margin: 0 auto;
+    }
 }
