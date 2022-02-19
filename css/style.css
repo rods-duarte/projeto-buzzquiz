@@ -130,7 +130,7 @@ ion-icon {
   width: 100%;
 }
 
-.item-quiz {
+.item-quiz { /*! LEMBRAR DE REMOVER O BACKGROUND-IMG */
   width: 340px;
   height: 181px;
   margin: 5px 0;
@@ -294,8 +294,11 @@ textarea {
   width: 340px;
 }
 
+/* Ajuste de texto para telas muito pequenas  */
 @media screen and (max-width: 340px) {
-    .caixa-aberta h2 {width: 310px;}
+  .caixa-aberta h2 {
+    width: 310px;
+  }
 }
 
 .caixa-aberta > div {
@@ -309,18 +312,37 @@ textarea {
 
 /* Tela 3-3 */
 
-#tela-3-1 {
-  display: block;
-}
-
 #tela-3-3 .caixa-aberta {
   display: none;
 }
 
 @media screen and (min-width: 1100px) {
+  .caixa {
+    width: 600px;
+    margin: 0 auto;
+  }
 
-    .caixa {
-        width: 600px;
-        margin: 0 auto;
-    }
+  #tela-3-1 button,
+  #tela-3-2 button,
+  #tela-3-3 button {
+    width: 360px;
+  }
+}
+
+/* Tela 3-4 */
+
+#tela-1 {
+  display: block;
+}
+
+#tela-3-4 > button {
+  width: 220px;
+  height: 44px;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+#tela-3-4 > button:last-child {
+  background-color: #e5e5e5;
+  color: #818181;
 }

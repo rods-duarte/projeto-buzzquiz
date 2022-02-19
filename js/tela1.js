@@ -1,37 +1,77 @@
 listarQuizzes();
+listarQuizzesUsuario();
 
-function listarQuizzes(){
-    const promise = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
-    promise.then(gerarQuizzDinamicamente);
+function listarQuizzes() {
+  const promise = axios.get(
+    "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes"
+  );
+  promise.then(gerarQuizzDinamicamente);
 }
 
-function gerarQuizzDinamicamente(resposta){
-    const lstQuizz = document.querySelector(".lista-quiz.todos");
-    // Para criar gerar a lista com os "Seus Quizzes", basta acessar com o 'querySelector' e povoar a lista usando o 'for'
+function gerarQuizzDinamicamente(resposta) {
+  const lstQuizz = document.querySelector(".lista-quiz.todos");
+  // Para criar gerar a lista com os "Seus Quizzes", basta acessar com o 'querySelector' e povoar a lista usando o 'for'
 
-    const quizzes = resposta.data;
+  const quizzes = resposta.data;
 
-    lstQuizz.innerHTML = "";
-    lstQuizz.innerHTML = `<h2>Todos os quizzes</h2>`;
-    for(let i = 0; i < quizzes.length; i++){
-        lstQuizz.innerHTML += `
-            <div class="item-quiz"
+  lstQuizz.innerHTML = "";
+  lstQuizz.innerHTML = `<h2>Todos os quizzes</h2>`;
+  for (let i = 0; i < quizzes.length; i++) {
+    lstQuizz.innerHTML += `
+            <div id="${quizzes[i].id}" class="item-quiz"
             style="background-image: linear-gradient(to top, black, transparent), url('${quizzes[i].image}');"
             onclick="irParaPaginaDoQuizzSelecionado()">
                     <h3>${quizzes[i].title}</h3>
             </div>
         `;
-    }
+  }
 }
 
-function irParaPaginaDoQuizzSelecionado(){
-    const esconderTela1 = document.getElementById("tela-1");
-    esconderTela1.classList.add("escondido");
+function irParaPaginaDoQuizzSelecionado() {
+  const esconderTela1 = document.getElementById("tela-1");
+  esconderTela1.classList.add("escondido");
 
-    const mostrarTela2 = document.getElementById("tela-2");
+  const mostrarTela2 = document.getElementById("tela-2");
 
-    //Essa parte fica pra quando a tela 2 tiver pronta
-    if(mostrarTela2.classList.contains("escondido")){
-        mostrarTela2.classList.remove("escondido");
-    }
+  //Essa parte fica pra quando a tela 2 tiver pronta
+  if (mostrarTela2.classList.contains("escondido")) {
+    mostrarTela2.classList.remove("escondido");
+  }
+}
+
+function listarQuizzesUsuario() {  //TODO Remover os quizzes do usuario da lista de quizzes geral
+  const lstQuizz = document.querySelector(`#tela-1 .lista-quiz`);
+  let quizzesUsuarioId = localStorage.getItem(`listaQuizzesUsuario`);
+
+  // reset pra nao duplicar quando atualizar a lista
+  lstQuizz.innerHTML = `
+        <div class="topo-usuario">
+          <h2>Seus Quizzes</h2>
+          <button><ion-icon name="add-circle"></ion-icon></button>
+        </div>
+  `
+
+  if(quizzesUsuarioId === null) {
+      lstQuizz.style.display = `none`;
+      return;
+  } else {
+      document.querySelector(`.criar-quiz`).style.display = `none`;
+  }
+
+  quizzesUsuarioId = JSON.parse(quizzesUsuarioId);
+  quizzesUsuarioId.forEach((id) => {
+    const promise = axios.get(
+      `https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${id}`
+    );
+
+    promise.then((resposta) => {
+      lstQuizz.innerHTML += `
+            <!-- Quiz -->
+            <div id="${resposta.data.id}" class="item-quiz" style="background-image: linear-gradient(to top, black, transparent), url('${resposta.data.image}');"
+            onclick="irParaPaginaDoQuizzSelecionado()">
+                <h3>${resposta.data.title} </h3>
+            </div>
+            `;
+    });
+  });
 }

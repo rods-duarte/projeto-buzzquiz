@@ -4,8 +4,6 @@
 
 //? nota: function Resposta(text, image, isCorrectAnswer) -> str, str, bool
 
-
-
 var quiz = {
   title: ``,
   image: ``,
@@ -14,31 +12,23 @@ var quiz = {
 };
 var numeroPerguntas, numeroNiveis;
 
-// Funcionamento do botao no primeiro formulario (Tela 3-1)
 function botaoParteUm() {
-  // informacoes de input
   let titulo = document.querySelector(`#quiz-titulo`).value;
   let img = document.querySelector(`#quiz-img`).value;
   numeroPerguntas = document.querySelector(`#quiz-numero-perguntas`).value;
   numeroNiveis = document.querySelector(`#quiz-numero-niveis`).value;
 
-  // validacao dos dados
-
   if (!validarDadosParteUm(titulo, img, numeroPerguntas, numeroNiveis)) {
     alert(`DADOS INVALIDOS !`);
   } else {
-    // entra se os dados sao validos
     quiz.title = titulo;
     quiz.image = img;
     criarFormularioParteDois(numeroPerguntas);
     document.querySelector(`#tela-3-1`).style.display = "none";
     document.querySelector(`#tela-3-2`).style.display = "block";
-    //reset de variavel
-    dadosValidos = false;
   }
 }
 
-// validacao dos dados da primeira etapa de criacao de quiz
 function validarDadosParteUm(titulo, img, numeroPerguntas, numeroNiveis) {
   const regexUrl = /(https:\/\/).+/g;
   let validaImg = regexUrl.test(img);
@@ -60,7 +50,6 @@ function validarDadosParteUm(titulo, img, numeroPerguntas, numeroNiveis) {
   }
 }
 
-// cria o formulario da parte dois
 function criarFormularioParteDois(numeroPerguntas) {
   let formulario = document.querySelector(`#tela-3-2 .formulario`);
   for (let i = 2; i <= numeroPerguntas; i++) {
@@ -135,131 +124,55 @@ function criarFormularioParteDois(numeroPerguntas) {
   }
 }
 
-// abre o formulario de cada pergunta/nivel
 function abrirCaixa(elemento) {
   elemento.style.display = "none";
   elemento.parentNode.querySelector(`.caixa-aberta`).style.display = "flex";
 }
 
-// botao que confirma os dados do formulario e constroi a proxima etapa
 function botaoParteDois() {
   let perguntas = document.querySelectorAll(`#tela-3-2 .caixa .caixa-aberta`);
 
   for (let i = 0; i < perguntas.length; i++) {
-    // informacoes a serem validadas
-    let texto = perguntas[i].querySelector(`.pergunta-texto`).value;
-    let cor = perguntas[i].querySelector(`.pergunta-cor`).value;
-    let respostaCerta = perguntas[i].querySelector(`.resposta-certa`).value;
-    let respostaCertaImg =
-      perguntas[i].querySelector(`.resposta-certa-img`).value;
-    let respostaErrada = perguntas[i].querySelector(`.resposta-errada-1`).value;
-    let respostaErradaImg = perguntas[i].querySelector(
-      `.resposta-errada-1-img`
-    ).value;
-    let respostaErradaDois =
-      perguntas[i].querySelector(`.resposta-errada-2`).value;
-    let respostaErradaDoisImg = perguntas[i].querySelector(
-      `.resposta-errada-2-img`
-    ).value;
-    let respostaErradaTres =
-      perguntas[i].querySelector(`.resposta-errada-3`).value;
-    let respostaErradaTresImg = perguntas[i].querySelector(
-      `.resposta-errada-3-img`
-    ).value;
-
-    if (
-      !validarPergunta(
-        texto,
-        cor,
-        respostaCerta,
-        respostaCertaImg,
-        respostaErrada,
-        respostaErradaImg,
-        respostaErradaDois,
-        respostaErradaDoisImg,
-        respostaErradaTres,
-        respostaErradaTresImg
-      )
-    ) {
+    if (!validarPergunta(perguntas[i])) {
       alert(`Dados Invalidos !`);
       quiz.questions = []; // reset
       return;
     } else {
-      // construcao do obj que sera enviado ao servidor
       let pergunta = new Pergunta(
-        texto,
-        cor,
+        perguntas[i].querySelector(`.pergunta-texto`).value,
+        perguntas[i].querySelector(`.pergunta-cor`).value,
         criarListaRespostas(perguntas[i])
       );
       quiz.questions.push(pergunta);
     }
   }
-  alert(`DEU BOM ! ! !`); //! REMOVER
-  // Troca de tela
   criarFormularioParteTres(numeroNiveis);
   document.querySelector(`#tela-3-2`).style.display = `none`;
   document.querySelector(`#tela-3-3`).style.display = `block`;
 }
 
-// cria o formulario da parte tres
-function criarFormularioParteTres(numeroNiveis) {
-    let formulario = document.querySelector(`#tela-3-3 .formulario`);
-    for (let i = 2; i <= numeroNiveis; i++) {
-      formulario.innerHTML += `
-          <!-- Nivel -->
-          <div class="caixa">
-            <div class="caixa-fechada">
-              <h2>Nivel ${i}</h2>
-              <ion-icon
-                name="create-outline"
-                onclick="abrirCaixa(this.parentNode)"
-              ></ion-icon>
-            </div>
-            <div class="caixa-aberta">
-              <h2>Nivel ${i}</h2>
-              <div>
-                <!-- Titulo do nivel -->
-                <input
-                  type="text"
-                  class="nivel nivel-titulo"
-                  placeholder="Titulo do nivel"
-                />
-                <!-- Porcentagem de acerto minima do nivel -->
-                <input
-                  type="number"
-                  class="nivel nivel-porcentagem"
-                  placeholder="% de acerto minima"
-                />
-                <!-- Imagem do nivel -->
-                <input
-                  type="text"
-                  class="nivel nivel-img"
-                  placeholder="URL da imagem do nivel"
-                />
-                <!-- Descricao do nivel -->
-                <textarea type="text" class="nivel nivel-descricao" placeholder="Descricao do nivel"></textarea>
-                
-              </div>
-            </div>
-          </div>
-          `;
-    }
-  }
+function validarPergunta(pergunta) {
+  let texto = pergunta.querySelector(`.pergunta-texto`).value;
+  let cor = pergunta.querySelector(`.pergunta-cor`).value;
+  let respostaCerta = pergunta.querySelector(`.resposta-certa`).value;
+  let respostaCertaImg =
+    pergunta.querySelector(`.resposta-certa-img`).value;
+  let respostaErrada = pergunta.querySelector(`.resposta-errada-1`).value;
+  let respostaErradaImg = pergunta.querySelector(
+    `.resposta-errada-1-img`
+  ).value;
+  let respostaErradaDois =
+    pergunta.querySelector(`.resposta-errada-2`).value;
+  let respostaErradaDoisImg = pergunta.querySelector(
+    `.resposta-errada-2-img`
+  ).value;
+  let respostaErradaTres =
+    pergunta.querySelector(`.resposta-errada-3`).value;
+  let respostaErradaTresImg = pergunta.querySelector(
+    `.resposta-errada-3-img`
+  ).value;
 
-// Valida formulario das perguntas
-function validarPergunta(
-  texto,
-  cor,
-  respostaCerta,
-  respostaCertaImg,
-  respostaErrada,
-  respostaErradaImg,
-  respostaErradaDois,
-  respostaErradaDoisImg,
-  respostaErradaTres,
-  respostaErradaTresImg
-) {
-  const regexCor = /^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/g;
+  const regexCor = /^#([a-fA-F0-9]{6})$/g;
   const regexUrl = /(https:\/\/).+/;
   let validaCor = regexCor.test(cor);
   let validaRespostaErradaImg = regexUrl.test(respostaErradaImg);
@@ -299,7 +212,6 @@ function validarPergunta(
   }
 }
 
-// retorna um array das respostas de uma pergunta
 function criarListaRespostas(pergunta) {
   let respostas = [];
   let respostasTexto = pergunta.querySelectorAll(`.resposta`);
@@ -330,15 +242,152 @@ function criarListaRespostas(pergunta) {
   return respostas;
 }
 
-// construtor obj resposta
+function criarFormularioParteTres(numeroNiveis) {
+  let formulario = document.querySelector(`#tela-3-3 .formulario`);
+  for (let i = 2; i <= numeroNiveis; i++) {
+    formulario.innerHTML += `
+          <!-- Nivel -->
+          <div class="caixa">
+            <div class="caixa-fechada">
+              <h2>Nivel ${i}</h2>
+              <ion-icon
+                name="create-outline"
+                onclick="abrirCaixa(this.parentNode)"
+              ></ion-icon>
+            </div>
+            <div class="caixa-aberta">
+              <h2>Nivel ${i}</h2>
+              <div>
+                <!-- Titulo do nivel -->
+                <input
+                  type="text"
+                  class="nivel nivel-titulo"
+                  placeholder="Titulo do nivel"
+                />
+                <!-- Porcentagem de acerto minima do nivel -->
+                <input
+                  type="number"
+                  class="nivel nivel-porcentagem"
+                  placeholder="% de acerto minima"
+                />
+                <!-- Imagem do nivel -->
+                <input
+                  type="text"
+                  class="nivel nivel-img"
+                  placeholder="URL da imagem do nivel"
+                />
+                <!-- Descricao do nivel -->
+                <textarea 
+                  type="text" 
+                  class="nivel nivel-descricao" 
+                  placeholder="Descricao do nivel"></textarea>
+                
+              </div>
+            </div>
+          </div>
+          `;
+  }
+}
+
+function botaoParteTres() {
+  let niveis = document.querySelectorAll(`#tela-3-3 .caixa .caixa-aberta`);
+  for (let i = 0; i < niveis.length; i++) {
+    if (!validarNivel(niveis[i])) {
+      quiz.levels = []; // reset
+      alert(`Dados invalidos ! ! !`);
+      return;
+    }
+  }
+  if (!validaPorcentagemNiveis()) {
+    quiz.levels = [];
+    alert(`Um dos niveis precisa ter a porcentagem minima de 0% !`);
+    return;
+  } else {
+    let promiseQuiz = axios.post("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes", quiz);
+    
+    // Local Storage
+    promiseQuiz.then((resposta) => {
+      let id = resposta.data.id;
+      let lista = localStorage.getItem(`listaQuizzesUsuario`);
+      if(lista === null) {
+          localStorage.setItem(`listaQuizzesUsuario`, `[${id}]`);
+      } else {
+          lista = JSON.parse(lista);
+          lista.push(id);
+          localStorage.setItem(`listaQuizzesUsuario`, JSON.stringify(lista));
+      }
+  })
+
+    document.querySelector(`#tela-3-4 .item-quiz`).style.backgroundImage = `url("${quiz.image}")`;
+    document.querySelector(
+      `#tela-3-4 .item-quiz h3`
+    ).innerHTML = `${quiz.title}`;
+    document.querySelector(`#tela-3-3`).style.display = `none`;
+    document.querySelector(`#tela-3-4`).style.display = `block`;
+  }
+}
+
+function validarNivel(nivel) {
+  let titulo = nivel.querySelector(`.nivel-titulo`).value;
+  let porcentagemAcerto = nivel.querySelector(`.nivel-porcentagem`).value;
+  let img = nivel.querySelector(`.nivel-img`).value;
+  let descricao = nivel.querySelector(`.nivel-descricao`).value;
+
+  let regexUrl = /(https:\/\/).+/g;
+  let validaImg = regexUrl.test(img);
+
+  if (titulo.length < 10) {
+    return false;
+  } else if (porcentagemAcerto < 0 || porcentagemAcerto > 100) {
+    return false;
+  } else if (!validaImg) {
+    return false;
+  } else if (descricao.length < 30) {
+    return false;
+  } else {
+    let novoNivel = new Nivel(
+      titulo,
+      img,
+      descricao,
+      Number(porcentagemAcerto)
+    );
+    quiz.levels.push(novoNivel);
+    return true;
+  }
+}
+
+function validaPorcentagemNiveis() {
+  //TODO validar se existem dois niveis com mesma %
+  for (let i = 0; i < quiz.levels.length; i++) {
+    if (quiz.levels[i].minValue === 0) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function botaoEnviarHome() {
+  document.querySelector(`#tela-3-4`).style.display = `none`;
+  document.querySelector(`#tela-1`).style.display = `block`;
+  listarQuizzesUsuario();
+  //! TALVEZ implementar funcao que atualiza lista de quizz geral
+}
+
 function Resposta(text, image, isCorrectAnswer) {
   this.text = text;
   this.image = image;
   this.isCorrectAnswer = isCorrectAnswer;
 }
 
-// construtor obj pergunta
 function Pergunta(title, color, answers) {
-  (this.title = title), (this.color = color);
+  this.title = title;
+  this.color = color;
   this.answers = answers;
+}
+
+function Nivel(title, image, text, minValue) {
+  this.title = title;
+  this.image = image;
+  this.text = text;
+  this.minValue = minValue;
 }
