@@ -1,348 +1,268 @@
 /* Import fonte  */
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 /* Inicio Geral */
 
-* {
-  box-sizing: border-box;
-}
+* {box-sizing:border-box}
 
 body {
-  font-family: "Roboto", sans-serif;
-  background-color: #e5e5e5;
+    font-family: 'Roboto', sans-serif;
+    background-color: #fafafa;
 }
 
 header {
-  display: flex;
-  width: 100%;
-  height: 69px;
-  background-color: #ec362d;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+    width: 100%;
+    height: 69px;
+    background-color: #EC362D;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  justify-content: center;
-  align-items: center;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
 }
 
 h1 {
-  color: #fff;
-  font-size: 37px;
-  font-weight: 700;
+    color: #FFF;
+    font-size: 37px;
+    font-weight: 700;
 }
 
 h2 {
-  font-size: 20px;
-  font-weight: 700;
-  text-align: left;
-}
-
-#tela-1,
-#tela-2,
-#tela-3-1,
-#tela-3-2,
-#tela-3-3,
-#tela-3-4 {
-  width: 100%;
-  height: fit-content;
-  margin-top: 100px;
-  padding-bottom: 100px;
-  display: none;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: left;
 }
 
 ion-icon {
-  color: #ec362d;
-  font-size: 32px;
-}
-
-.escondido {
-  display: none;
+    color: #EC362D;
+    font-size: 32px;
 }
 
 /* Fim Geral */
 
 /* Inicio Tela 1 */
 
-.criar-quiz {
-  width: 90%;
-  max-width: 340px;
-  height: 181px;
-  margin: 0 auto;
-  padding-top: 20px;
-  border: 1px dashed #d5d5d5;
-  border-radius: 5px;
+#tela-1 {
+    width: 100%;
+    height: fit-content;
+    margin-top: 100px;
+    padding-bottom: 100px;
+}
 
-  font-size: 20px;
-  text-align: center;
+.criar-quiz {
+    width: 90%;
+    max-width: 340px;
+    height: 181px;
+    margin: 0 auto;
+    padding-top: 20px;
+    border: 1px dashed #d5d5d5;
+    border-radius: 5px;
+
+    font-size: 20px;
+    text-align: center;
 }
 
 .topo-usuario {
-  width: 100%;
-  max-width: 340px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
+
 .topo-usuario > button {
-  background-color: #e5e5e5;
-  border: none;
+    background-color: #FFF;
+    border: none;
+
 }
 
 .criar-quiz > span {
-  width: 250px;
-  margin: 15px 0;
-  display: inline-block;
-  color: #b9b9b9;
+    width: 250px;
+    margin: 15px 0;
+    display: inline-block;
+    color: #B9B9B9;
+    
 }
 
 .criar-quiz > button {
-  width: 150px;
-  height: 40px;
-  margin: 0 auto;
-  border: 1px dashed #ec362d;
-  border-radius: 50px;
-  background-color: #fff;
+    width: 150px;
+    height: 40px;
+    margin: 0 auto;
+    border: 1px dashed #EC362D;
+    border-radius: 50px;
+    background-color: #FFF;
 
-  display: block;
+    display: block;
 
-  color: #ec362d;
-  font-size: 21px;
+    color: #EC362D;
+    font-size: 21px;
 }
 
 .lista-quiz {
-  width: 90%;
-  max-width: 340px;
-  margin: 30px auto;
+    width: 90%;
+    max-width: 340px;
+    margin: 30px auto;
 
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  text-align: left;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: left;
 }
 
 .lista-quiz > h2 {
-  display: inline-block;
-  margin: 5px 0;
-  width: 100%;
+    display: inline-block;
+    margin: 5px 0;
+    width: 100%;
 }
 
-.item-quiz { /*! LEMBRAR DE REMOVER O BACKGROUND-IMG */
-  width: 340px;
-  height: 181px;
-  margin: 5px 0;
-  border-radius: 5px;
-  background-image: linear-gradient(to top, black, transparent),
-    url("https://br.web.img2.acsta.net/r_654_368/newsv7/21/10/15/22/09/2037612.jpg");
-  background-size: cover;
-
-  position: relative;
+.item-quiz {
+    width: 340px;
+    height: 181px;
+    margin: 5px 0;
+    border-radius: 5px;
+    background-image: linear-gradient(to top, black, transparent), url("https://br.web.img2.acsta.net/r_654_368/newsv7/21/10/15/22/09/2037612.jpg");
+    background-size: cover;
+    
+    position: relative;
 }
 
 .item-quiz > h3 {
-  position: absolute;
-  left: 17px;
-  bottom: 7px;
-  font-size: 20px;
-  color: #fff;
+    position: absolute;
+    left: 17px;
+    bottom: 7px;
+    font-size: 20px;
+    color: #FFF;
 }
 
 @media screen and (min-width: 1100px) {
-  .lista-quiz,
-  .criar-quiz,
-  .topo-usuario {
-    max-width: none;
-  }
 
-  .criar-quiz,
-  .topo-usuario {
-    width: 1040px;
-  }
+    .lista-quiz, .criar-quiz, .topo-usuario {max-width: none;}
+    
+    .criar-quiz, .topo-usuario {width: 1040px;}
 
-  .lista-quiz {
-    width: 1060px;
-    margin: 30px auto;
-  }
+    .lista-quiz {
+        width: 1060px;
+        margin: 30px auto;
+    }
 
-  .lista-quiz > h2 {
-    padding-left: 10px;
-  }
+    .lista-quiz > h2 {padding-left: 10px;}
 
-  .topo-usuario {
-    justify-content: flex-start;
-  }
+    .topo-usuario {
+        justify-content: flex-start;
+    }
 
-  .item-quiz {
-    margin: 5px;
-  }
+    .item-quiz {margin: 5px;}
 }
 
 /* Fim Tela 1 */
 
-/* Inicio Tela 3 */
-
-#tela-3-1 > h2,
-#tela-3-2 > h2,
-#tela-3-3 > h2,
-#tela-3-4 > h2 {
-  font-size: 20px;
-  font-weight: 700;
-  text-align: center;
+.escondido{
+    display: none;
 }
 
-#tela-3-1 > button,
-#tela-3-2 > button,
-#tela-3-3 > button,
-#tela-3-4 > button {
-  width: 320px;
-  height: 54px;
-  margin: 30px auto 0 auto;
-  border: none;
-  border-radius: 15px;
+/* Inicio Tela 2 */
 
-  display: block;
-
-  background-color: #ec362d;
-  color: #fff;
+#tela-2{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.caixa-aberta {
-  width: 100%;
-  height: fit-content;
-  margin-top: 35px;
-  padding: 20px 0;
+#tela-2 > div{
+    width: 100%;
+    height: 142px;
 
-  background-color: #fff;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+    position: absolute;
+    top: 69px;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-size: cover;
+
+    font-weight: normal;
+    font-size: 19px;
+    line-height: 22px;
+    color: #fff;
 }
 
-.caixa-fechada {
-  width: 100%;
-  height: fit-content;
-  margin-top: 35px;
-  padding: 20px;
+#tela-2 .caixa-pergunta{
+    background-color: #fff;
+    width: 375px;
+    height: 436px;
+    margin-bottom: 28px;
 
-  background-color: #fff;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+    position: relative;
+    top: 235px;
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.caixa-fechada ion-icon {
-  color: #000;
+.conteudo{
+    width: 340px;
+    height: 395px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-input,
-textarea {
-  width: 341px;
-  height: 46px;
-  margin: 5px;
-  padding-left: 10px;
-  border: 1px solid #d1d1d1;
-  border-radius: 5px;
+.conteudo .pergunta{
+    height: 89px;
 
-  font-size: 19px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-style: normal;
+    font-weight: bold;
+    font-size: 19px;
+    line-height: 22px;
+    text-align: center;
+    color: #fff;
 }
 
-textarea {
-  height: 177px;
-  resize: none;
-  font-family: "Roboto", sans-serif;
-  padding-top: 10px;
+.alternativas{
+    height: 294px;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 13px;
 }
 
-::placeholder {
-  /* Chrome, Firefox, Opera, Safari 10.1+ */
+.resposta{
+    width: 163px;
+    height: 141px;
 
-  color: #bababa;
-  opacity: 1; /* Firefox */
-  font-style: italic;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-:-ms-input-placeholder {
-  /* Internet Explorer 10-11 */
-  color: #bababa;
-  font-style: italic;
+.resposta > img{
+    height: 113px;
 }
 
-::-ms-input-placeholder {
-  /* Microsoft Edge */
-  color: #bababa;
-  font-style: italic;
+.resposta > p{
+    height: 22px;
+
+    display: flex;
+    align-items: center;
+
+    font-style: normal;
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 15px;
+    color: #000000;
 }
 
-/* Tela 3-1 */
-
-/* Tela 3-2 */
-
-#tela-3-2 .caixa-aberta {
-  display: none;
-}
-
-.caixa-aberta h2 {
-  text-align: left;
-  display: inline-block;
-  width: 340px;
-}
-
-/* Ajuste de texto para telas muito pequenas  */
-@media screen and (max-width: 340px) {
-  .caixa-aberta h2 {
-    width: 310px;
-  }
-}
-
-.caixa-aberta > div {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 10px;
-  margin-bottom: 30px;
-}
-
-/* Tela 3-3 */
-
-#tela-3-3 .caixa-aberta {
-  display: none;
-}
-
-@media screen and (min-width: 1100px) {
-  .caixa {
-    width: 600px;
-    margin: 0 auto;
-  }
-
-  #tela-3-1 button,
-  #tela-3-2 button,
-  #tela-3-3 button {
-    width: 360px;
-  }
-}
-
-/* Tela 3-4 */
-
-#tela-1 {
-  display: block;
-}
-
-#tela-3-4 > button {
-  width: 220px;
-  height: 44px;
-  margin-bottom: 0;
-  margin-top: 0;
-}
-
-#tela-3-4 > button:last-child {
-  background-color: #e5e5e5;
-  color: #818181;
-}
+/* Fim Tela 2 */

@@ -6,210 +6,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/style.css" />
-    <link
-      rel="shortcut icon"
-      href="./img/buzzfeed-favicon.png"
-      type="image/x-icon"
-    />
+    <link rel="shortcut icon" href="./img/buzzfeed-favicon.png" type="image/x-icon">
     <title>BuzzQuizz</title>
   </head>
   <body>
     <header><h1>BuzzQuizz</h1></header>
     <!-- Tela 1 -->
     <main id="tela-1">
+      
       <!-- Lista quizzes do Usuario -->
       <div class="lista-quiz">
+        <div class="topo-usuario">
+          <h2>Seus Quizzes</h2>
+          <button onclick="criarQuizz()"><ion-icon name="add-circle"></ion-icon></button>
+        </div>
+        <!-- Quiz -->
+        <div class="item-quiz">
+          <h3>Os simpsons</h3>
+        </div>
+        <!-- Quiz -->
+        <div class="item-quiz">
+          <h3>Os simpsons</h3>
+        </div>
+        <!-- Quiz -->
+        <div class="item-quiz">
+          <h3>Os simpsons</h3>
+        </div>
+        <!-- Quiz -->
+        <div class="item-quiz">
+          <h3>Os simpsons</h3>
+        </div>
+        <!-- Quiz -->
+        <div class="item-quiz">
+          <h3>Os simpsons</h3>
+        </div>
+        <!-- Quiz -->
+        <div class="item-quiz">
+          <h3>Os simpsons</h3>
+        </div>
       </div>
+
       <!-- Lista usuario vazia: So aparecer quando o usuario nao tiver nenhum quiz -->
       <div class="criar-quiz">
         <span>Voce nao criou nenhum quizz ainda :(</span>
-        <button>Criar Quizz</button>
+        <button onclick="criarQuizz()">Criar Quizz</button>
       </div>
 
       <!-- Lista quizzes todos -->
       <div class="lista-quiz todos">
         <h2>Todos os quizzes</h2>
+        <!-- Quiz -->
+        <div class="item-quiz">
+          <h3>Os simpsons</h3>
+        </div>
       </div>
     </main>
-
+    
     <!-- Tela 2 -->
-    <main id="tela-2"></main>
+    <main id="tela-2">
+      <!-- Inserir uma 'div' que vai ser o container de cada pergunta -->
+    </main>
     <!-- Tela 3.1 -->
-    <main id="tela-3-1">
-      <h2>Comece pelo começo</h2>
-      <div class="caixa">
-        <div class="caixa-aberta">
-          <input
-            id="quiz-titulo"
-            type="text"
-            class="pergunta"
-            placeholder="Título do seu quizz"
-          />
-          <input
-            id="quiz-img"
-            type="url"
-            class="pergunta"
-            placeholder="URL da imagem do seu quizz"
-          />
-          <input
-            id="quiz-numero-perguntas"
-            type="number"
-            class="pergunta"
-            placeholder="Quantidade de perguntas do quizz"
-          />
-          <input
-            id="quiz-numero-niveis"
-            type="number"
-            class="pergunta"
-            placeholder="Quantidade de níveis do quizz"
-          />
-        </div>
-      </div>
-      <button onclick="botaoParteUm()">Prosseguir pra criar perguntas</button>
-    </main>
+    <main id="tela-3.1"></main>
     <!-- Tela 3.2 -->
-    <main id="tela-3-2">
-      <!-- Criar Perguntas -->
-      <h2>Crie suas perguntas</h2>
-      <div class="formulario">
-        <!-- Pergunta -->
-        <div class="caixa">
-          <div class="caixa-fechada">
-            <h2>Pergunta 1</h2>
-            <ion-icon
-              name="create-outline"
-              onclick="abrirCaixa(this.parentNode)"
-            ></ion-icon>
-          </div>
-          <div class="caixa-aberta">
-            <h2>Pergunta 1</h2>
-            <div>
-              <input
-                type="text"
-                class="pergunta pergunta-texto"
-                placeholder="Texto da pergunta 1"
-              />
-              <input
-                type="text"
-                class="pergunta pergunta-cor"
-                placeholder="Cor de fundo da pergunta 1"
-              />
-            </div>
-            <h2>Resposta correta</h2>
-            <div>
-              <input
-                type="text"
-                class="resposta resposta-certa"
-                placeholder="Resposta correta"
-              />
-              <input
-                type="text"
-                class="resposta-img resposta-certa-img"
-                placeholder="URL da imagem"
-              />
-            </div>
-            <h2>Respostas incorretas</h2>
-            <div>
-              <input
-                type="text"
-                class="resposta resposta-errada-1"
-                placeholder="Resposta incorreta 1"
-              />
-              <input
-                type="text"
-                class="resposta-img resposta-errada-1-img"
-                placeholder="URL da imagem 1"
-              />
-            </div>
-            <div>
-              <input
-                type="text"
-                class="resposta resposta-errada-2"
-                placeholder="Resposta incorreta 2"
-              />
-              <input
-                type="text"
-                class="resposta-img resposta-errada-2-img"
-                placeholder="URL da imagem 2"
-              />
-            </div>
-            <div>
-              <input
-                type="text"
-                class="resposta resposta-errada-3"
-                placeholder="Resposta incorreta 3"
-              />
-              <input
-                type="text"
-                class="resposta-img resposta-errada-3-img"
-                placeholder="URL da imagem 3"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <button onclick="botaoParteDois()">Prosseguir pra criar niveis</button>
-      <!--! Adicionar onclick para ir a tela 3.3 -->
-    </main>
+    <main id="tela-3.2"></main>
     <!-- Tela 3.3 -->
-    <main id="tela-3-3">
-      <!-- Criar Niveis -->
-      <h2>Agora, decida os niveis!</h2>
-      <div class="formulario">
-        <!-- Nivel -->
-        <div class="caixa">
-          <div class="caixa-fechada">
-            <h2>Nivel 1</h2>
-            <ion-icon
-              name="create-outline"
-              onclick="abrirCaixa(this.parentNode)"
-            ></ion-icon>
-          </div>
-          <div class="caixa-aberta">
-            <h2>Nivel 1</h2>
-            <div>
-              <!-- Titulo do nivel -->
-              <input
-                type="text"
-                class="nivel nivel-titulo"
-                placeholder="Titulo do nivel"
-              />
-              <!-- Porcentagem de acerto minima do nivel -->
-              <input
-                type="number"
-                class="nivel nivel-porcentagem"
-                placeholder="% de acerto minima"
-              />
-              <!-- Imagem do nivel -->
-              <input
-                type="text"
-                class="nivel nivel-img"
-                placeholder="URL da imagem do nivel"
-              />
-              <!-- Descricao do nivel -->
-              <textarea
-                type="text"
-                class="nivel nivel-descricao"
-                placeholder="Descricao do nivel"
-              ></textarea>
-            </div>
-          </div>
-        </div>
-      </div>
-      <button onclick="botaoParteTres()">Finalizar Quizz</button>
-      <!--! Adicionar onclick para ir a tela 3.4 -->
-    </main>
+    <main id="tela-3.3"></main>
     <!-- Tela 3.4 -->
-    <main id="tela-3-4">
-      <h2>Seu quizz esta pronto!</h2>
-      <div class="lista-quiz">
-        <div onclick="" class="item-quiz"> <!--! Adicionar funcao que leva a tela 2 -->
-          <h3></h3>
-        </div>
-      </div>
-      <button onclick="">Acessar Quizz</button> <!--! Adicionar funcao que leva a tela 2 -->
-      <button onclick="botaoEnviarHome()">Voltar para Home</button> <!--! Adicionar funcao que leva a tela 1-->
-    </main>
+    <main id="tela-3.4"></main>
     <script
       type="module"
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
@@ -219,7 +83,6 @@
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
     ></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="js/tela1.js"></script>
-    <script src="js/tela3.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>
