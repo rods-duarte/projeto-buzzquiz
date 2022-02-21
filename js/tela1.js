@@ -132,3 +132,8 @@ function listarQuizzesUsuario() {  //TODO Remover os quizzes do usuario da lista
     });
   });
 }
+
+function criarQuiz(id) {
+    document.querySelector(`${id}`).style.display = `none`;
+    document.querySelector(`#tela-3-1`).style.display = `block`;
+}
