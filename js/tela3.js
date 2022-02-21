@@ -1,9 +1,3 @@
-//? nota: function Quiz(title, image, questions) -> str, str, arr[Pergunta]
-
-//? nota: function Pergunta(title, color, answers) -> str, str, arr[Resposta]
-
-//? nota: function Resposta(text, image, isCorrectAnswer) -> str, str, bool
-
 var quiz = {
   title: ``,
   image: ``,
@@ -26,8 +20,10 @@ function botaoParteUm() {
     criarFormularioParteDois(numeroPerguntas);
     document.querySelector(`#tela-3-1`).style.display = "none";
     document.querySelector(`#tela-3-2`).style.display = "block";
-    //reset de variavel
-    dadosValidos = false; //TODO Refazer essa parte
+
+    // reset
+    titulo = ``;
+    img = ``;
   }
 }
 
@@ -54,7 +50,8 @@ function validarDadosParteUm(titulo, img, numeroPerguntas, numeroNiveis) {
 
 function criarFormularioParteDois(numeroPerguntas) {
   let formulario = document.querySelector(`#tela-3-2 .formulario`);
-  for (let i = 2; i <= numeroPerguntas; i++) {
+  formulario.innerHTML = ``; // reset
+  for (let i = 1; i <= numeroPerguntas; i++) {
     formulario.innerHTML += `
       <!-- Pergunta -->
       <div class="caixa">
@@ -124,6 +121,7 @@ function criarFormularioParteDois(numeroPerguntas) {
       </div>
       `;
   }
+  numeroPerguntas = 0; // reset
 }
 
 function abrirCaixa(elemento) {
@@ -186,7 +184,7 @@ function botaoParteDois() {
   document.querySelector(`#tela-3-3`).style.display = `block`;
 }
 
-function validarPergunta( //TODO reescrever essa parte como feito na validaNivel
+function validarPergunta( 
   texto,
   cor,
   respostaCerta,
@@ -270,7 +268,8 @@ function criarListaRespostas(pergunta) {
 
 function criarFormularioParteTres(numeroNiveis) {
   let formulario = document.querySelector(`#tela-3-3 .formulario`);
-  for (let i = 2; i <= numeroNiveis; i++) {
+  formulario.innerHTML = ``; // reset
+  for (let i = 1; i <= numeroNiveis; i++) {
     formulario.innerHTML += `
           <!-- Nivel -->
           <div class="caixa">
@@ -313,9 +312,21 @@ function criarFormularioParteTres(numeroNiveis) {
           </div>
           `;
   }
+  numeroNiveis = 0; // reset
 }
 
 function botaoParteTres() {
+  // reset
+  document.querySelector(`#tela-3-4`).innerHTML = `
+  <h2>Seu quizz esta pronto!</h2>
+      <div class="lista-quiz">
+        <div class="item-quiz">
+          <h3></h3>
+        </div>
+      </div>
+      <button id="iniciar-quiz-criado">Acessar Quizz</button>
+      <button onclick="botaoEnviarHome()">Voltar para Home</button>
+      `;
   let niveis = document.querySelectorAll(`#tela-3-3 .caixa .caixa-aberta`);
   for (let i = 0; i < niveis.length; i++) {
     if (!validarNivel(niveis[i])) {
@@ -325,19 +336,44 @@ function botaoParteTres() {
     }
   }
   if (!validaPorcentagemNiveis()) {
-    quiz.levels = [];
+    quiz.levels = []; // reset
     alert(`Um dos niveis precisa ter a porcentagem minima de 0% !`);
     return;
   } else {
-    axios.post("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes", quiz);
+    let promiseQuiz = axios.post(
+      "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes",
+      quiz
+    );
+
+    // Local Storage
+    promiseQuiz.then((resposta) => {
+      let id = resposta.data.id;
+      let lista = localStorage.getItem(`listaQuizzesUsuario`);
+      if (lista === null) {
+        localStorage.setItem(`listaQuizzesUsuario`, `[${id}]`);
+      } else {
+        lista = JSON.parse(lista);
+        lista.push(id);
+        localStorage.setItem(`listaQuizzesUsuario`, JSON.stringify(lista));
+      }
+      document
+        .querySelector(`#iniciar-quiz-criado`)
+        .setAttribute(`onclick`, `irParaPaginaDoQuizzSelecionado(${id})`);
+      document
+        .querySelector(`#tela-3-4 .item-quiz`)
+        .setAttribute(`onclick`, `irParaPaginaDoQuizzSelecionado(${id})`);
+    });
+
     document.querySelector(
-      `#tela-3-4 item-quiz`
-    ).innerHTML.style.backgroundImage = `url("${quiz.image}")`;
+      `#tela-3-4 .item-quiz`
+    ).style.backgroundImage = `url("${quiz.image}")`;
     document.querySelector(
-      `#tela-3-4 item-quiz h3`
+      `#tela-3-4 .item-quiz h3`
     ).innerHTML = `${quiz.title}`;
+
     document.querySelector(`#tela-3-3`).style.display = `none`;
     document.querySelector(`#tela-3-4`).style.display = `block`;
+    quiz.levels = []; // reset
   }
 }
 
@@ -371,13 +407,20 @@ function validarNivel(nivel) {
 }
 
 function validaPorcentagemNiveis() {
-  //TODO validar se existem dois niveis com mesma %
   for (let i = 0; i < quiz.levels.length; i++) {
     if (quiz.levels[i].minValue === 0) {
       return true;
     }
   }
   return false;
+}
+
+function botaoEnviarHome() {
+  document.querySelector(`#tela-2`).style.display = `none`;
+  document.querySelector(`#tela-3-4`).style.display = `none`;
+  document.querySelector(`#tela-1`).style.display = `block`;
+  listarQuizzesUsuario();
+  /
 }
 
 function Resposta(text, image, isCorrectAnswer) {

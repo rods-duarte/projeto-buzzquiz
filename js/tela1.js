@@ -18,82 +18,25 @@ function gerarQuizzDinamicamente(resposta){
         lstQuizz.innerHTML += `
             <div id="${quizzes[i].id}" class="item-quiz"
             style="background-image: linear-gradient(to top, black, transparent), url('${quizzes[i].image}');"
-            onclick="irParaPaginaDoQuizzSelecionado(this)">
+            onclick="irParaPaginaDoQuizzSelecionado(this.id)">
                     <h3>${quizzes[i].title}</h3>
             </div>
         `;
     }
 }
 
-function irParaPaginaDoQuizzSelecionado(elemento){
+function irParaPaginaDoQuizzSelecionado(id){
     document.querySelector(`#tela-1`).style.display = `none`;
-
+    document.querySelector(`#tela-3-4`).style.display = `none`;
     document.querySelector(`#tela-2`).style.display = `block`;
+    document.querySelector(`#tela-2`).innerHTML = `
+    <!-- Titulo do quizz -->
+      <div class="quiz-titulo">
+        <h3></h3>
+      </div>
+    `
 
-    // Monta a tela 2 
-    const promiseQuiz = axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${elemento.id}`);
-
-    promiseQuiz.then((resposta) => {
-        
-        const quiz = resposta.data;
-        const perguntas = quiz.questions;
-
-        document.querySelector(`.quiz-titulo`).style.backgroundImage = `url("${quiz.image}")`;
-        document.querySelector(`.quiz-titulo h3`).innerHTML = quiz.title;
-
-        for(let i = 0; i < perguntas.length; i++) {
-
-            const respostas = perguntas[i].answers;
-            const numeroRespostas = respostas.length;
-            
-            document.querySelector(`#tela-2`).innerHTML += `
-            <!-- Pergunta -->
-            <div class="quiz-pergunta" id="pergunta-${i}">
-              <div class="quiz-pergunta-titulo" style=background-color:${perguntas[i].color}>
-                <h3>${perguntas[i].title}</h3>
-              </div>
-              <!-- Respostas -->
-              <div class="quiz-pergunta-respostas">
-                <!-- resposta 1 -->
-                <div class="quiz-pergunta-resposta" onclick="selecionarResposta()">
-                  <img>
-                  <span></span>
-                </div>
-                <!-- resposta 2 -->
-                <div class="quiz-pergunta-resposta" onclick="selecionarResposta()">
-                  <img>
-                  <span></span>
-                </div>
-                <!-- resposta 3 -->
-                <div class="quiz-pergunta-resposta" onclick="selecionarResposta()">
-                  <img>
-                  <span></span>
-                </div>
-                <!-- resposta 4 -->
-                <div class="quiz-pergunta-resposta" onclick="selecionarResposta()">
-                  <img>
-                  <span></span>
-                </div>
-              </div>
-            </div>
-            `
-            
-
-            let elementosResposta = document.querySelectorAll(`#pergunta-${i} .quiz-pergunta-resposta`);
-
-            for(let j = 0; j < numeroRespostas; j++) {
-                elementosResposta[j].querySelector(`span`).innerHTML = respostas[j].text;
-                elementosResposta[j].querySelector(`img`).setAttribute(`src`, `${respostas[j].image}`);
-                elementosResposta[j].classList.add(`resposta-ativa`);
-
-                // Embaralha as respostas
-                let posicaoAleatoria = Math.floor(Math.random() * (elementosResposta.length));
-                elementosResposta[j].style.order = posicaoAleatoria;
-            }
-
-
-        }
-    })
+    responderQuiz(id);
 }
 
 function listarQuizzesUsuario() {  //TODO Remover os quizzes do usuario da lista de quizzes geral
@@ -104,7 +47,7 @@ function listarQuizzesUsuario() {  //TODO Remover os quizzes do usuario da lista
   lstQuizz.innerHTML = `
         <div class="topo-usuario">
           <h2>Seus Quizzes</h2>
-          <button><ion-icon name="add-circle"></ion-icon></button>
+          <button><ion-icon onclick="criarQuiz('#tela-1')" name="add-circle"></ion-icon></button>
         </div>
   `
 
@@ -125,7 +68,7 @@ function listarQuizzesUsuario() {  //TODO Remover os quizzes do usuario da lista
       lstQuizz.innerHTML += `
             <!-- Quiz -->
             <div id="${resposta.data.id}" class="item-quiz" style="background-image: linear-gradient(to top, black, transparent), url('${resposta.data.image}');"
-            onclick="irParaPaginaDoQuizzSelecionado()">
+            onclick="irParaPaginaDoQuizzSelecionado(this.id)">
                 <h3>${resposta.data.title} </h3>
             </div>
             `;
@@ -137,3 +80,4 @@ function criarQuiz(id) {
     document.querySelector(`${id}`).style.display = `none`;
     document.querySelector(`#tela-3-1`).style.display = `block`;
 }
+
