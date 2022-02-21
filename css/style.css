@@ -130,7 +130,7 @@ ion-icon {
   width: 100%;
 }
 
-.item-quiz {
+.item-quiz { /*! LEMBRAR DE REMOVER O BACKGROUND-IMG */
   width: 340px;
   height: 181px;
   margin: 5px 0;
@@ -148,6 +148,10 @@ ion-icon {
   bottom: 7px;
   font-size: 20px;
   color: #fff;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  max-width: 320px;
 }
 
 @media screen and (min-width: 1100px) {
@@ -294,8 +298,11 @@ textarea {
   width: 340px;
 }
 
+/* Ajuste de texto para telas muito pequenas  */
 @media screen and (max-width: 340px) {
-    .caixa-aberta h2 {width: 310px;}
+  .caixa-aberta h2 {
+    width: 310px;
+  }
 }
 
 .caixa-aberta > div {
@@ -309,18 +316,117 @@ textarea {
 
 /* Tela 3-3 */
 
-#tela-3-1 {
-  display: block;
-}
-
 #tela-3-3 .caixa-aberta {
   display: none;
 }
 
 @media screen and (min-width: 1100px) {
+  .caixa {
+    width: 600px;
+    margin: 0 auto;
+  }
 
-    .caixa {
-        width: 600px;
-        margin: 0 auto;
-    }
+  #tela-3-1 button,
+  #tela-3-2 button,
+  #tela-3-3 button {
+    width: 360px;
+  }
 }
+
+/* Tela 3-4 */
+
+
+#tela-3-4 > button {
+  width: 220px;
+  height: 44px;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+#tela-3-4 > button:last-child {
+  background-color: #e5e5e5;
+  color: #818181;
+}
+
+/* Inicio Tela 2 */
+
+#tela-2{
+  margin-top: 69px;
+}
+
+.quiz-titulo {
+  width: 100%;
+  height: 142px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+}
+
+.quiz-titulo > h3, .quiz-pergunta-titulo > h3 {
+  display: inline-block;
+  width: 100%;
+  font-size: 20px;
+  color: white;
+  text-align: center;
+  
+  overflow-wrap: break-word;
+}
+
+.quiz-pergunta {
+  width: 100%;
+  height: fit-content;
+  background-color: #FFF;
+  margin: 50px auto;
+}
+
+.quiz-pergunta-titulo {
+  width: 90%;
+  height: 89px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.quiz-pergunta-respostas {
+  width: 90%;
+  height: fit-content;
+  margin: 20px auto;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.quiz-pergunta-resposta {
+  width: fit-content;
+  height: fit-content;
+  display: none;
+  margin: 5px;
+}
+
+.quiz-pergunta-resposta > span {
+  display: block;
+  font-size: 13px;
+  color: #000;
+  width: 163px;
+  overflow-wrap: break-word;
+}
+
+.quiz-pergunta-resposta > img {
+  width: 163px;
+  height: 113px;
+  object-fit: cover;
+}
+
+.resposta-ativa {
+  display: block;
+}
+
+#tela-1 {
+  display: block;
+}
+
+/* Fim Tela 2 */
