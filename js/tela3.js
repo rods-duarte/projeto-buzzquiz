@@ -420,7 +420,6 @@ function botaoEnviarHome() {
   document.querySelector(`#tela-3-4`).style.display = `none`;
   document.querySelector(`#tela-1`).style.display = `block`;
   listarQuizzesUsuario();
-  /
 }
 
 function Resposta(text, image, isCorrectAnswer) {
